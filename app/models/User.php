@@ -25,26 +25,27 @@ class User {
          */
   		$username = strtolower($username);
   		$db = db_connect();
-          $statement = $db->prepare("select * from users WHERE username = :name;");
-          $statement->bindValue(':name', $username);
-          $statement->execute();
-          $rows = $statement->fetch(PDO::FETCH_ASSOC);
-  		    // print_r($rows['password']);
+      $statement = $db->prepare("select * from users WHERE username = :name;");
+      $statement->bindValue(':name', $username);
+      $statement->execute();
+      $rows = $statement->fetch(PDO::FETCH_ASSOC);
+      // print_r($rows['password']);
 
-          // log all login attempts 
-          $log_statement = $db->prepare("insert into log (username, attempt, time) values (?, ?, ?);");
-          $login_time = date('Y-m-d H:i:s');
-          
+      // log all login attempts 
+      $log_statement = $db->prepare("insert into log (username, attempt, time) values (?, ?, ?);");
+      $login_time = date('Y-m-d H:i:s');
+  
+      //after 3 unsuccessful login attempts, lock the user out for 60 seconds 
+      $bad_attempts = $this->count_bad_attempt($username);
+      $last_bad_attempt = $this->get_last_bad_attempt_time($username);
+
+      if ($bad_attempts >= 3 && strtotime($last_bad_attempt) > (time() - 60)) {
+        // print_r("lock");
+        return 'lock';
+      } 
+      
   		if (password_verify($password, $rows['password'])) {
-  			
-        //after 3 unsuccessful login attempts, lock the user out for 60 seconds 
-        $bad_attempts = $this->count_bad_attempt($username);
-        $last_bad_attempt = $this->get_last_bad_attempt_time($username);
-        
-        if ($bad_attempts >= 3 && strtotime($last_bad_attempt) > (time() - 60)) {
-          // print_r("lock");
-          return 'lock';
-        } else {
+
           $_SESSION['auth'] = 1;
           $_SESSION['username'] = ucwords($username);
           $_SESSION['user_id'] = $rows['id'];
@@ -53,7 +54,7 @@ class User {
           $log_statement->execute([$username, 'good', $login_time]);
     			header('Location: /home');
     			die;
-        }
+
   		} else {
   			if(isset($_SESSION['failedAuth'])) {
   				$_SESSION['failedAuth'] ++; //increment

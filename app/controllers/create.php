@@ -18,13 +18,13 @@ class Create extends Controller {
         $this->view('create/index');
       } 
 
-      if (strlen($password) < 8) {
+      if (strlen($password) < 5) {
         $_SESSION['password_length'] = 1;
         $this->view('create/index');
       }
 
       // call model to check if username exist, if not then create new account
-      if($password == $confirm_password && strlen($password) > 7) {
+      if($password == $confirm_password && strlen($password) > 4) {
         // echo 1; die;
          $check_user = $this->model('User');
          $check_user->get_user_by_username($username, $password); 

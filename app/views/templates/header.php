@@ -23,12 +23,12 @@ if (!isset($_SESSION['auth'])) {
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/home">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/about">About Me</a>
-        </li>
+        </li> -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Reminders
@@ -38,9 +38,9 @@ if (!isset($_SESSION['auth'])) {
             <li><a class="dropdown-item" href="/reminders/create">Create Reminder</a></li>
           </ul>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
-        </li>
+        </li> -->
       </ul>
 
       <ul class="navbar-nav me-5 mb-2 mb-lg-0">

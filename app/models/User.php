@@ -81,19 +81,20 @@ class User {
   // check if username exists
   public function get_user_by_username ($username, $password) {
     $db = db_connect();
-    $statement = $db->prepare("select password from users where username = ?;");
+    $statement = $db->prepare("select * from users where username = ?;");
     $statement->execute([$username]);
     $rows = $statement->fetch(PDO::FETCH_ASSOC);
 
-    // if new user, then create
-    if (empty($rows)) {
-      // hash password, then save to database
-      $hash = password_hash($password, PASSWORD_DEFAULT);
-      $this->create_user($username, $hash);
-    } else {
+    // // if new user, then create
+    // if (empty($rows)) {
+    //   // hash password, then save to database
+    //   $hash = password_hash($password, PASSWORD_DEFAULT);
+    //   $this->create_user($username, $hash);
+    // } else {
       // user exist
-      return $rows;
-    }  
+    
+    return $rows;
+    // }  
   }
 
   // check attempt

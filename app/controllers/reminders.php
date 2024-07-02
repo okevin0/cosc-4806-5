@@ -23,8 +23,14 @@ class Reminders extends Controller {
       $created_at = date("Y-m-d H:i:s");
       // print_r($subject);
       // die;
-      $reminder->create_reminder($_SESSION['user_id'], $subject, $created_at);
-      header('Location: /reminders');
+      if (empty($subject)) {
+        $_SESSION['subject_empty'] = 1;
+        $this->view('reminders/create/index');
+      } else {
+        unset($_SESSION['subject_empty']);
+        $reminder->create_reminder($_SESSION['user_id'], $subject, $created_at);
+        $this->view('reminders/index');
+      }
     }
 
     // delete a reminder
@@ -55,9 +61,16 @@ class Reminders extends Controller {
       } else {
         $is_completed = 0;
       }
-      
-      $reminder->update_reminder($_SESSION['user_id'], $reminder_id, $subject,$is_completed);
-      header('Location: /reminders');
+
+      if (empty($subject)) {
+        $_SESSION['subject_empty'] = 1;
+        $update_reminder = $reminder->get_reminder_by_id($reminder_id);
+        $this->view('reminders/update/index', [ 'reminder' => $update_reminder ]);
+      } else {
+        unset($_SESSION['subject_empty']);
+        $reminder->update_reminder($_SESSION['user_id'], $reminder_id, $subject,$is_completed);
+        header('Location: /reminders');
+      }
     }
 
     // mark reminder as completed/uncompleted by clicking on the button

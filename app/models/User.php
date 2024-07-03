@@ -10,11 +10,14 @@ class User {
         
     }
 
-    public function test () {
+    public function get_all_users () {
       $db = db_connect();
-      $statement = $db->prepare("select * from users;");
+      $statement = $db->prepare("SELECT l.username, l.attempt, count(l.attempt) as number from log l
+                                  join users u on u.username = l.username
+                                  group by l.username, l.attempt
+                                  order by l.username, l.attempt desc;");
       $statement->execute();
-      $rows = $statement->fetch(PDO::FETCH_ASSOC);
+      $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
       return $rows;
     }
 
@@ -52,6 +55,11 @@ class User {
           unset($_SESSION['failedAuth']);
           
           $log_statement->execute([$username, 'good', $login_time]);
+
+          if ($username == 'admin') {
+            $_SESSION['admin'] = 1;
+          }
+        
     			header('Location: /home');
     			die;
 

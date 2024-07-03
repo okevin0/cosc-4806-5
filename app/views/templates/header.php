@@ -38,6 +38,11 @@ if (!isset($_SESSION['auth'])) {
             <li><a class="dropdown-item" href="/reminders/create">Create Reminder</a></li>
           </ul>
         </li>
+        <?php if ($_SESSION['admin'] == 1) { ?>
+        <li class="nav-item">
+        <a class="nav-link" href="/reports/allusers" >All Users</a>
+        </li>
+        <?php } ?>  
         <!-- <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
         </li> -->

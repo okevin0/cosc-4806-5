@@ -48,9 +48,6 @@ if (!isset($_SESSION['auth'])) {
             <li><a class="dropdown-item" href="/reports/count_reminders">User's Reminder Count</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-        <a class="nav-link" href="/reports/allusers" >All Users</a>
-        </li>
         <?php } ?>  
         <!-- <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>

@@ -41,7 +41,8 @@ class Reports extends Controller {
       }
 
       $user_id = $_REQUEST['id'];
-      // print_r($user_id);
+      // print_r($_REQUEST['id']);
+      // print_r($_REQUEST['name']);
       $reminder = $this->model('Reminder');
       $list_of_reminders = $reminder->get_all_reminders_by_userid($user_id);
 

@@ -19,7 +19,7 @@
 
                                 echo "<tr><td>".$reminders['username']."</td>
                                       <td>".$reminders['number']."</td>
-                                      <td><a href='/reports/view_all_reminders/?id=".$reminders['id']."'>View All</a></td></tr>";
+                                      <td><a href='/reports/view_all_reminders/?id=".$reminders['id']."&name=".$reminders['username']."'>View All</a></td></tr>";
                             }
                                // print_r($_SESSION['user_id']);
                         ?>

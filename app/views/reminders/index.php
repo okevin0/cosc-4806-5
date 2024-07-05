@@ -3,7 +3,7 @@
     <div class="page-header" id="banner">
         <div class="row">
             <div class="col-lg-12">
-                <h1>Reminders</h1>
+                <h1> <?php if()Reminders</h1>
                 <p class="lead">Today is <?= date("F jS, Y"); ?> <a class="btn btn-primary" href="/reminders/create">Create Reminder</a></p>
                 <table class="table table-striped table-hover" >
                       <thead>

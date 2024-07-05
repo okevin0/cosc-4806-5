@@ -39,6 +39,15 @@ if (!isset($_SESSION['auth'])) {
           </ul>
         </li>
         <?php if ($_SESSION['admin'] == 1) { ?>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Reports
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/reports/allusers">All Users</a></li>
+            <li><a class="dropdown-item" href="/reports/count_reminders">User's Reminder Count</a></li>
+          </ul>
+        </li>
         <li class="nav-item">
         <a class="nav-link" href="/reports/allusers" >All Users</a>
         </li>

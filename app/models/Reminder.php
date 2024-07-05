@@ -13,6 +13,17 @@ class Reminder {
       $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
       return $rows;
     }
+
+    public function get_user_reminders_count () {
+      $db = db_connect();
+      $statement = $db->prepare("select u.id, u.username, count(r.subject) as number FROM users u
+                                  left join reminders r on u.id= r.user_id
+                                  group by u.id, u.username
+                                  order by count(r.subject) desc;");
+      $statement->execute();
+      $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+      return $rows;
+    }
   
   // Create a reminder, view reminders (read), update existing reminders, and delete reminders
     public function get_all_reminders_by_userid ($user_id) {

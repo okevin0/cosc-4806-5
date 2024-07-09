@@ -67,3 +67,17 @@ if (!isset($_SESSION['auth'])) {
     </div>
   </div>
 </nav>
+<?php if( $_SESSION['controller'] != 'home' ) { ?>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><?= ucwords($_SESSION['controller']) ?></li>
+          </ol>
+        </nav>
+    </div>
+  </div>
+</div>
+<?php } ?>

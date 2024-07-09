@@ -21,6 +21,17 @@ class User {
       return $rows;
     }
 
+    public function get_users_last_attempts() {
+      $db = db_connect();
+      $statement = $db->prepare("select username, max(time) as time from log
+                                      where attempt='good'
+                                      group by username
+                                      order by max(time) desc;");
+      $statement->execute();
+      $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+      return $rows;
+    }
+
     public function authenticate($username, $password) {
         /*
          * if username and password good then

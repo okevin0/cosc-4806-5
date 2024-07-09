@@ -1,7 +1,8 @@
 <?php
 
+// do not allow a non-admin user and non-logged-in users to view the page
 class Reports extends Controller {
-
+  
     public function index() {
       // $all_users = $this->model('User');
       header('Location: /home');

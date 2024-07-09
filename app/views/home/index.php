@@ -8,11 +8,28 @@
             </div>
         </div>
     </div>
-
+<?php if ($_SESSION['admin'] == 1) { ?>
     <div class="row">
         <div class="col-lg-12">
-            <p> <a href="/logout">Click here to logout</a></p>
+            <h1>User's Last Attempt</h1>
+            <table class="table table-striped table-hover" >
+                  <thead>
+                    <tr>
+                      <th scope="col">Username</th>
+                      <th scope="col">Last Attempt</th>
+                    </tr>
+                  </thead>
+                <tbody>
+                    <?php  
+                        foreach ($data['data'] as $user) {
+
+                            echo "<tr><td>".$user['username']."</td>
+                                  <td>".$user['time']."</td></tr>";
+                        }
+                    ?>
+                  </tbody>
+            </table>
         </div>
     </div>
-
+<?php } ?>
     <?php require_once 'app/views/templates/footer.php' ?>

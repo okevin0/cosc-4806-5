@@ -31,7 +31,7 @@
             </div>
             <div class="col-lg-6">
                 <div style="margin-top: 80px;">
-                    <canvas id="attepmtChart"></canvas>
+                    <canvas id="reminderChart"></canvas>
                 </div>
                 <script>
                     const labels = <?php echo json_encode($username); ?>;
@@ -72,7 +72,7 @@
                     };
 
                     var attepmtChart = new Chart(
-                        document.getElementById('attepmtChart'),config
+                        document.getElementById('reminderChart'),config
                     );
                 </script>
             </div>
